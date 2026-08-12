@@ -17,12 +17,12 @@ from pyspark.sql import functions as F
 # -----------------------------------------------------------------------------
 RAW_CUSTOMERS_PATH = spark.conf.get(
     "bronze.customers.source_path",
-    "abfss://raw@<your_storage_account>.dfs.core.windows.net/retail/customers/"
+    "abfss://raw@<lakehouse_sample>.dfs.core.windows.net/retail/customers/"
 )
 
 SCHEMA_LOCATION = spark.conf.get(
     "bronze.customers.schema_location",
-    "abfss://raw@<your_storage_account>.dfs.core.windows.net/_schemas/bronze_customers/"
+    "abfss://raw@<lakehouse_sample>.dfs.core.windows.net/_schemas/bronze_customers/"
 )
 
 
