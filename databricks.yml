@@ -57,7 +57,7 @@ targets:
     default: true
     mode: development
     workspace:
-      host: https://<your_workspace_id>.azuredatabricks.net
+      host: https://560696151014778.azuredatabricks.net
 
   prod:
     mode: production
