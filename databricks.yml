@@ -25,7 +25,7 @@ resources:
   pipelines:
     retail_lakehouse_pipeline:
       name: retail_lakehouse_cdc_pipeline_${bundle.target}
-      catalog: ${var.catalog_name}
+      catalog: $lakehouse_sample
       target: retail_lakehouse_${bundle.target}
       photon: true
       channel: CURRENT
