@@ -1,0 +1,67 @@
+# =============================================================================
+# databricks.yml — Databricks Asset Bundle (DAB) configuration
+# -----------------------------------------------------------------------------
+# Defines the DLT pipeline that runs the Bronze -> Silver (CDC) -> Gold
+# retail lakehouse, plus dev/prod deployment targets.
+#
+# NOTE: Replace the placeholders below with your actual environment values:
+#   - <your_workspace_id>   -> your Azure Databricks workspace host
+#   - <your_catalog_name>   -> your Unity Catalog catalog name
+#   - <your_storage_account> in src/*.py -> your ADLS Gen2 storage account
+# =============================================================================
+
+bundle:
+  name: retail-lakehouse-cdc-dab
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog_name:
+    description: Unity Catalog catalog used by all pipeline targets
+    default: your_catalog_name
+
+resources:
+  pipelines:
+    retail_lakehouse_pipeline:
+      name: retail_lakehouse_cdc_pipeline_${bundle.target}
+      catalog: ${var.catalog_name}
+      target: retail_lakehouse_${bundle.target}
+      photon: true
+      channel: CURRENT
+      continuous: false
+      development: true
+      libraries:
+        - notebook:
+            path: ./src/bronze_customers.py
+        - notebook:
+            path: ./src/silver_orders_cdc.py
+        - notebook:
+            path: ./src/gold_daily_sales.py
+      configuration:
+        bronze.customers.source_path: "abfss://raw@<your_storage_account>.dfs.core.windows.net/retail/customers/"
+        bronze.customers.schema_location: "abfss://raw@<your_storage_account>.dfs.core.windows.net/_schemas/bronze_customers/"
+        silver.orders_cdc.source_path: "abfss://raw@<your_storage_account>.dfs.core.windows.net/retail/orders_cdc/"
+        silver.orders_cdc.schema_location: "abfss://raw@<your_storage_account>.dfs.core.windows.net/_schemas/silver_orders_cdc/"
+
+  jobs:
+    retail_lakehouse_job:
+      name: retail_lakehouse_cdc_job_${bundle.target}
+      tasks:
+        - task_key: run_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.retail_lakehouse_pipeline.id}
+
+targets:
+  dev:
+    default: true
+    mode: development
+    workspace:
+      host: https://<your_workspace_id>.azuredatabricks.net
+
+  prod:
+    mode: production
+    workspace:
+      host: https://<your_workspace_id>.azuredatabricks.net
+    run_as:
+      user_name: ${workspace.current_user.userName}
