@@ -23,12 +23,12 @@ from pyspark.sql.types import (
 
 CDC_SOURCE_PATH = spark.conf.get(
     "silver.orders_cdc.source_path",
-    "abfss://raw@<your_storage_account>.dfs.core.windows.net/retail/orders_cdc/"
+    "abfss://raw@lakehouse_sample.dfs.core.windows.net/retail/orders_cdc/"
 )
 
 SCHEMA_LOCATION = spark.conf.get(
     "silver.orders_cdc.schema_location",
-    "abfss://raw@<your_storage_account>.dfs.core.windows.net/_schemas/silver_orders_cdc/"
+    "abfss://raw@lakehouse_sample.dfs.core.windows.net/_schemas/silver_orders_cdc/"
 )
 
 # Explicit schema for the raw CDC JSON events (recommended for streaming
