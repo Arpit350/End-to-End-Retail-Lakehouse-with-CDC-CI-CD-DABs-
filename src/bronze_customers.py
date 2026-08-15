@@ -10,7 +10,7 @@
 # =============================================================================
 
 import dlt
-from pyspark.sql import functions as Function
+from pyspark.sql import functions as f
 
 # -----------------------------------------------------------------------------
 # Widgets / configuration (overridden via databricks.yml job parameters)
