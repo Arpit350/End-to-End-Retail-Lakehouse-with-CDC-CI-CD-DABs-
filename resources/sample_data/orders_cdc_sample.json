@@ -1,0 +1,6 @@
+{"order_id": "ORD1001", "customer_id": "CUST01", "order_status": "PLACED", "order_amount": 149.99, "order_date": "2026-08-01T10:15:00Z", "op": "INSERT", "sequence_num": "2026-08-01T10:15:00Z"}
+{"order_id": "ORD1002", "customer_id": "CUST02", "order_status": "PLACED", "order_amount": 89.50, "order_date": "2026-08-01T11:02:00Z", "op": "INSERT", "sequence_num": "2026-08-01T11:02:00Z"}
+{"order_id": "ORD1001", "customer_id": "CUST01", "order_status": "SHIPPED", "order_amount": 149.99, "order_date": "2026-08-01T10:15:00Z", "op": "UPDATE", "sequence_num": "2026-08-02T09:30:00Z"}
+{"order_id": "ORD1003", "customer_id": "CUST01", "order_status": "PLACED", "order_amount": 249.00, "order_date": "2026-08-02T14:20:00Z", "op": "INSERT", "sequence_num": "2026-08-02T14:20:00Z"}
+{"order_id": "ORD1002", "customer_id": "CUST02", "order_status": "CANCELLED", "order_amount": 89.50, "order_date": "2026-08-01T11:02:00Z", "op": "DELETE", "sequence_num": "2026-08-03T08:00:00Z"}
+{"order_id": "ORD1001", "customer_id": "CUST01", "order_status": "DELIVERED", "order_amount": 149.99, "order_date": "2026-08-01T10:15:00Z", "op": "UPDATE", "sequence_num": "2026-08-04T16:45:00Z"}
